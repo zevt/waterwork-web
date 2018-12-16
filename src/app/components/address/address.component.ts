@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import * as html2canvas from 'node_modules/html2canvas';
 
 @Component({
   selector: 'app-address',
@@ -12,6 +13,10 @@ export class AddressComponent implements OnInit {
   url = null;
   key = 'AIzaSyAX2jlXZmoFoJklhX-WZ3p3Dgdy_xtFjcY';
   baseUrl = 'https://www.google.com/maps/embed/v1/view?';
+
+  @ViewChild('screen') screen : ElementRef;
+  @ViewChild('canvas') canvas : ElementRef;
+  @ViewChild('downloadLink') downloadLink: ElementRef;
 
   address = new Address();
   constructor(private http: HttpClient) { }
@@ -40,6 +45,15 @@ export class AddressComponent implements OnInit {
 
   check() {
     console.log(this.address.streetAddress1);
+  }
+
+  screenShot() {
+    html2canvas(this.screen.nativeElement).then(canvas => {
+      this.canvas.nativeElement.src = canvas.toDataURL();
+      this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+      this.downloadLink.nativeElement.download = 'map.png';
+      this.downloadLink.nativeElement.click();
+    });
   }
 
 }
