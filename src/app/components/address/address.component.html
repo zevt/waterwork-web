@@ -1,0 +1,38 @@
+<div>
+  <form (ngSubmit)="send()" #form="ngForm">
+    <div>
+      <label >Address1</label>
+      <input type="text" [(ngModel)]="address.streetAddress1" (ngModelChange)="check()" name="address1"/>
+    </div>
+    <div>
+      <label >Address2</label>
+      <input type="text" [(ngModel)]="address.streetAddress2" name="address2"/>
+    </div>
+    <div>
+      <label >City</label>
+      <input type="text" [(ngModel)]="address.city" name="city"/>
+    </div>
+    <div>
+      <label >TX</label>
+      <input type="text"  [(ngModel)]="address.state" name="state"/>
+    </div>
+    <div>
+      <label >Zip</label>
+      <input type="text"  [(ngModel)]="address.zipcode"  name="zipcode"/>
+    </div>
+    <div>
+      <label >Button</label>
+      <input type="submit"  name="button"/>
+    </div>
+  </form>
+</div>
+<hr>
+<div *ngIf="url">
+  <iframe
+    width="800"
+    height="600"
+    frameborder="0" style="border:0"
+    [src]="url | safe: 'resourceUrl'"
+    allowfullscreen>
+  </iframe>
+</div>
