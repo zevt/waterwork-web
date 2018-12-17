@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import * as htmlToImage from 'node_modules/html-to-image';
+import * as download from 'node_modules/downloadjs';
 
 @Component({
   selector: 'app-address',
@@ -14,10 +16,17 @@ export class AddressComponent implements OnInit {
   baseUrl = 'https://www.google.com/maps/embed/v1/view?';
 
   address = new Address();
+  map = new Map();
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
 
+  }
+
+  mapInit(location) {
+    this.map.location = location;
+    this.map.zoom = 24;
+    return this.map;
   }
 
   send() {
@@ -34,7 +43,7 @@ export class AddressComponent implements OnInit {
           .join(' &');
         this.url = this.baseUrl + this.url;
         console.log(this.url);
-
+        this.map = this.mapInit(r[0].geometry.location);
       });
   }
 
@@ -42,6 +51,12 @@ export class AddressComponent implements OnInit {
     console.log(this.address.streetAddress1);
   }
 
+  screenShot() {
+    htmlToImage.toPng(document.getElementById('map'))
+    .then(function (dataUrl) {
+      download(dataUrl, 'map.png');
+    });
+  }
 }
 
 class Address {
@@ -55,4 +70,9 @@ class Address {
 class Location {
   lat: number;
   lng: number;
+}
+
+class Map {
+  location : Location;
+  zoom: number;
 }
