@@ -9,6 +9,8 @@ import { SafePipe } from './pipes/safe.pipe';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,10 @@ import {FormsModule} from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAX2jlXZmoFoJklhX-WZ3p3Dgdy_xtFjcY'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-<div>
+<div class="container">
   <form (ngSubmit)="send()" #form="ngForm">
     <div>
       <label >Address1</label>
@@ -28,11 +28,15 @@
 </div>
 <hr>
 <div *ngIf="url">
-  <iframe
-    width="800"
-    height="600"
-    frameborder="0" style="border:0"
-    [src]="url | safe: 'resourceUrl'"
-    allowfullscreen>
-  </iframe>
+
+  <button type="button" class="btn btn-primary" (click)="screenShot()">Take Photo</button>
+  <br>
+
+  <div id ="map">
+      <agm-map [latitude]="map.location.lat" [longitude]="map.location.lng" [mapTypeId]="'satellite'"
+      [zoom] ="map.zoom">
+          <agm-marker [latitude]="map.location.lat" [longitude]="map.location.lng"></agm-marker>
+      </agm-map>
+  </div>
+
 </div>

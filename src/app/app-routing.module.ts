@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {AddressComponent} from './components/address/address.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/address', pathMatch: 'full' },
   {path: 'address',  component: AddressComponent}
 ];
 
