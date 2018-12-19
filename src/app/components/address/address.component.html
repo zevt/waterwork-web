@@ -27,9 +27,10 @@
   </form>
 </div>
 <hr>
-<div *ngIf="url">
+<div *ngIf="map.visiable">
 
   <button type="button" class="btn btn-primary" (click)="screenShot()">Take Photo</button>
+  <!-- <input type="file" #imageInput accept="image/*"  (change)="selectedFile(imageInput)"/> -->
   <br>
 
   <div id ="map">
